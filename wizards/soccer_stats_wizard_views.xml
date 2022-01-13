@@ -1,0 +1,52 @@
+<odoo>
+    <record id="soccer_stats_wizard_form_view" model="ir.ui.view">
+        <field name="name">soccer.stats.import.wizard.form.view</field>
+        <field name="model">soccer.stats.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Soccer Stats Wizard">
+                <header>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="team_id"/>
+                            <field name="selectable_season_ids" invisible="1"/>
+                            <field name="season_ids" domain="[('id', 'in', selectable_season_ids)]"
+                                   attrs="{'invisible': [('team_id', '=', False)]}" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="real_win_percentage" widget="percentage"/>
+                            <field name="pythagorean_expectation_percentage" widget="percentage"/>
+                        </group>
+                        <group>
+                            <field name="home_real_win_percentage" widget="percentage"/>
+                            <field name="home_pythagorean_expectation_percentage" widget="percentage"/>
+                        </group>
+                        <group>
+                            <field name="away_real_win_percentage" widget="percentage"/>
+                            <field name="away_pythagorean_expectation_percentage" widget="percentage"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_statistics_data" model="ir.actions.act_window">
+        <field name="name">Soccer Statistics Wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">soccer.stats.wizard</field>
+        <field name="view_id" ref="soccer_stats_wizard_form_view"/>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="soccer_stats_config"
+              name="Soccer Statistics"
+              parent="menu_soccer_data_config"
+              sequence="1"
+              action="action_statistics_data"/>
+
+</odoo>

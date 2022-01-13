@@ -1,0 +1,47 @@
+<odoo>
+    <record id="import_wizard_form_view" model="ir.ui.view">
+        <field name="name">soccer.data.import.wizard.form.view</field>
+        <field name="model">soccer.data.import.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Import Wizard">
+                <header>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="import_type"/>
+                        </group>
+                        <group>
+                            <field name="league_id" attrs="{'invisible': [('import_type', '!=', 'league')]}"/>
+                            <field name="team_id" attrs="{'invisible': [('import_type', '!=', 'team')]}"/>
+                            <field name="year"
+                                   attrs="{'invisible': ['|', ('import_type', '=', False), ('import_type', '=', 'leagues')]}"/>
+                            <field name="extra_statistics" widget="boolean_toggle"
+                                   attrs="{'invisible': ['|', ('import_type', '=', False), ('import_type', '=', 'leagues')]}"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="import_data" string="Import Games" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_import_data" model="ir.actions.act_window">
+        <field name="name">Import Data</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">soccer.data.import.wizard</field>
+        <field name="view_id" ref="import_wizard_form_view"/>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="soccer_data_import_config"
+              name="Import Data"
+              parent="menu_soccer_data_config"
+              sequence="0"
+              action="action_import_data"/>
+
+</odoo>

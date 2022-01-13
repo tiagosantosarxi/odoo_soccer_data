@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_soccer_match,access_soccer_match,model_soccer_match,base.group_user,1,1,1,1
+access_soccer_league,access_soccer_league,model_soccer_league,base.group_user,1,1,1,1
+access_soccer_season,access_soccer_season,model_soccer_season,base.group_user,1,1,1,1
+access_soccer_team,access_soccer_team,model_soccer_team,base.group_user,1,1,1,1
+access_soccer_player,access_soccer_player,model_soccer_player,base.group_user,1,1,1,1
+access_soccer_data_import_wizard,access_soccer_data_import_wizard,model_soccer_data_import_wizard,base.group_user,1,1,1,1
+access_soccer_stats_wizard,access_soccer_stats_wizard,model_soccer_stats_wizard,base.group_user,1,1,1,1
+access_soccer_matchup_wizard,access_soccer_matchup_wizard,model_soccer_matchup_wizard,base.group_user,1,1,1,1

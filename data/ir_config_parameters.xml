@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<odoo noupdate="1">
+    <record id="x_rapidapi_key" model="ir.config_parameter">
+        <field name="key">x-rapidapi-key</field>
+        <field name="value"></field>
+    </record>
+
+    <record id="x_rapidapi_host" model="ir.config_parameter">
+        <field name="key">x-rapidapi-host</field>
+        <field name="value"></field>
+    </record>
+</odoo>
