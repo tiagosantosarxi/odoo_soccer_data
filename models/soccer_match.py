@@ -47,13 +47,13 @@ class SoccerMatch(models.Model):
     home_fouls = fields.Integer()
     home_corner_kicks = fields.Integer()
     home_offsides = fields.Integer()
-    home_ball_possession = fields.Integer()
+    home_ball_possession = fields.Float()
     home_yellow_cards = fields.Integer()
     home_red_cards = fields.Integer()
     home_goalkeeper_saves = fields.Integer()
     home_total_passes = fields.Integer()
     home_passes_accurate = fields.Integer()
-    home_passes_percentage = fields.Integer()
+    home_passes_percentage = fields.Float()
     away_shots_on_goal = fields.Integer()
     away_shots_off_goal = fields.Integer()
     away_total_shots = fields.Integer()
@@ -63,13 +63,14 @@ class SoccerMatch(models.Model):
     away_fouls = fields.Integer()
     away_corner_kicks = fields.Integer()
     away_offsides = fields.Integer()
-    away_ball_possession = fields.Integer()
+    away_ball_possession = fields.Float()
     away_yellow_cards = fields.Integer()
     away_red_cards = fields.Integer()
     away_goalkeeper_saves = fields.Integer()
     away_total_passes = fields.Integer()
     away_passes_accurate = fields.Integer()
     away_passes_percentage = fields.Float()
+    has_stats = fields.Boolean()
 
     def _compute_winner(self):
         for rec in self:
@@ -89,7 +90,9 @@ class SoccerMatch(models.Model):
 
     def prepare_games_statistics_vals(self, stat):
         team = 'home_' if stat.get('team').get('id') == int(self.home_team.api_id) else 'away_'
-        vals = {}
+        vals = {
+            'has_stats': True
+        }
         for stat_line in stat.get('statistics'):
             if STATS_MAP_KEYS.get(stat_line.get('type')) in ['passes_percentage', 'ball_possession']:
                 vals.update({
@@ -100,3 +103,6 @@ class SoccerMatch(models.Model):
                     team + STATS_MAP_KEYS.get(stat_line.get('type')): stat_line.get('value')
                 })
         return vals
+
+    def needs_to_import_stats(self):
+        return self.elapsed_time >= 90 and not self.has_stats

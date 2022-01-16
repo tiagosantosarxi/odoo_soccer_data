@@ -133,15 +133,15 @@ class SoccerDataImportWizard(models.TransientModel):
         game_id = self.env['soccer.match'].search([('api_id', '=', game.get('fixture').get('id'))])
         if not game_id:
             game_id = self.env['soccer.match'].create(self._prepare_game_vals(game))
-            if self.extra_statistics:
-                endpoint = '/v3/fixtures/statistics'
-                type = 'GET'
-                params = {
-                    'fixture': game_id.api_id
-                }
-                response = self.call(endpoint, type, params)
-                json_response = json.loads(response.content)
-                if json_response and json_response.get('response'):
-                    for stat in json_response.get('response'):
-                        game_id.write(game_id.prepare_games_statistics_vals(stat))
+        if self.extra_statistics and game_id.needs_to_import_stats():
+            endpoint = '/v3/fixtures/statistics'
+            type = 'GET'
+            params = {
+                'fixture': game_id.api_id
+            }
+            response = self.call(endpoint, type, params)
+            json_response = json.loads(response.content)
+            if json_response and json_response.get('response'):
+                for stat in json_response.get('response'):
+                    game_id.write(game_id.prepare_games_statistics_vals(stat))
         return game_id

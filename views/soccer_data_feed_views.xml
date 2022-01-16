@@ -69,13 +69,13 @@
                                     <field name="home_fouls"/>
                                     <field name="home_corner_kicks"/>
                                     <field name="home_offsides"/>
-                                    <field name="home_ball_possession"/>
+                                    <field name="home_ball_possession" widget="percentage"/>
                                     <field name="home_yellow_cards"/>
                                     <field name="home_red_cards"/>
                                     <field name="home_goalkeeper_saves"/>
                                     <field name="home_total_passes"/>
                                     <field name="home_passes_accurate"/>
-                                    <field name="home_passes_percentage"/>
+                                    <field name="home_passes_percentage" widget="percentage"/>
                                 </group>
                             </group>
                             <group>
@@ -89,13 +89,13 @@
                                     <field name="away_fouls"/>
                                     <field name="away_corner_kicks"/>
                                     <field name="away_offsides"/>
-                                    <field name="away_ball_possession"/>
+                                    <field name="away_ball_possession" widget="percentage"/>
                                     <field name="away_yellow_cards"/>
                                     <field name="away_red_cards"/>
                                     <field name="away_goalkeeper_saves"/>
                                     <field name="away_total_passes"/>
                                     <field name="away_passes_accurate"/>
-                                    <field name="away_passes_percentage"/>
+                                    <field name="away_passes_percentage" widget="percentage"/>
                                 </group>
                             </group>
                         </page>
